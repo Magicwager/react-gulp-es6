@@ -16,14 +16,13 @@
 ├── config					# 前端服务插件portal-fe-Devserver的配置文件
 ├── dist					# gulp产出的镜像目录		
 ├── docs					# 相关文档资料
-├── gulpfile.js				# gulp配置文件
+├── gulpfile.js				    # gulp配置文件
 ├── package-lock.json
-├── package.json			# 依赖及一键命令
+├── package.json			    # 依赖及一键命令
 └── src						# 项目代码
 ```
 
 ##### 代码说明
--
 
 
 - **react-router配置说明**
