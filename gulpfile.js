@@ -83,7 +83,7 @@ gulp.task('react-es6',function(){
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
     gulp.watch('src/**/**/*.less', ['less']);
-    gulp.watch('src/**/**/*.js');
+    gulp.watch(['./src/**/**/*.jsx','./src/**/**/*.js'],['react-es6']);
     gulp.watch([ 'src/**/**/*.html', 'src/**/**/*.js', 'src/**/**/*.css'], [ 'copy:src']);
 });
 

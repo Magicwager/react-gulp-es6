@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './pages/HelloWorld';
+import routes from './routes'
 
-ReactDOM.render(<Hello />,
+ReactDOM.render(routes,
   document.getElementById('app'));
