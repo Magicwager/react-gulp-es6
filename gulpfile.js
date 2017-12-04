@@ -75,7 +75,12 @@ gulp.task('react-es6',function(){
             },
             stats:{
               colors:true
-            }
+            },
+            module: {
+                loaders: [
+                  { test: /\.css$/, loader: 'style!css' },
+                ],
+              },
           }))
         .pipe(gulp.dest('./dist/build'))
 });
