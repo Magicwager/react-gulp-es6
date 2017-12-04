@@ -33,4 +33,8 @@
 - **react-router配置说明**
 
 react-router这里使用的是3.0.1版本。主要的配置在src/routes下，通过react-router的统一配置，可以清新易懂的方式项目代码的结构。
-访问例子：http://localhost:8888/react-gulp-es6/#/myRepo
+启动服务后访问例子：
+
+http://localhost:8888/react-gulp-es6/       根路由
+
+http://localhost:8888/react-gulp-es6/#/myRepo       自定义myRepo路由
