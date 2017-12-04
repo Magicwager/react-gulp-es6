@@ -23,6 +23,7 @@
 
 
 - **项目启动**
+
     具体操作如下：
     1. `npm install` 安装依赖
     2. 启动react调试服务,输入`gulp`
@@ -33,6 +34,7 @@
 - **react-router配置说明**
 
 react-router这里使用的是3.0.1版本。主要的配置在src/routes下，通过react-router的统一配置，可以清新易懂的方式项目代码的结构。
+
 启动服务后访问例子：
 
 http://localhost:8888/react-gulp-es6/       根路由
