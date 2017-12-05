@@ -61,6 +61,8 @@ gulp.task('less:dist', function () {
         .pipe(minifycss())
         .pipe(gulp.dest('dist'));
 });
+
+//es6 to js
 gulp.task('react-es6',function(){
     gulp.src(['./src/**/*.jsx','./src/**/*.js'])
         //.pipe(browserify({
@@ -69,7 +71,9 @@ gulp.task('react-es6',function(){
         .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
         .pipe(babel({presets:[es2015]}))//es6tojs的解析器
         .pipe(gulp.dest('dist'))
-        .pipe(webpack({//babel编译import会转成require，webpack再包装以下代码让代码里支持require
+        .pipe(webpack({
+            //babel编译import会转成require，webpack再包装以下代码让代码里支持require
+            devtool:'cheap-module-source-map',
             output:{
               filename:"index.js",
             },
@@ -84,6 +88,8 @@ gulp.task('react-es6',function(){
           }))
         .pipe(gulp.dest('./dist/build'))
 });
+
+gulp.task('webpack')
 
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
@@ -122,4 +128,5 @@ gulp.task('dev-server', function () {
 }) */
 gulp.task('before', [ 'copy:src', 'less']);
 gulp.task('default', ['before','react-es6','dev-server', 'watch']);
+gulp.task('dev',['before','react-es6','dev-server', 'watch'])
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {Card} from 'antd';
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter'
-
-const mock = new MockAdapter(axios);
 
 export default class Myrepo extends Component {
     constructor(props){
@@ -32,21 +29,6 @@ export default class Myrepo extends Component {
     
             }
         )
-        /* let myRepoData=[
-            {
-                title:"react-demos",
-                href:"https://github.com/Magicwager/react-demos.git",
-                content:"从最基础的react示例到结合gulp搭建react项目再到gulp+react+es6，步步为营"
-            },
-            {
-                title:"react-gulp-es6",
-                href:"https://github.com/Magicwager/react-gulp-es6.git",
-                content:"最简易利用gulp搭建react项目，并且是最新的es6写法"
-            }
-        ]
-        this.setState({
-            myRepoData:myRepoData
-        }) */
     }
     render(){
         let self=this;
