@@ -84,6 +84,7 @@ gulp.task('react-es6',function(){
           }))
         .pipe(gulp.dest('./dist/build'))
 });
+
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
@@ -109,6 +110,7 @@ gulp.task('dev-server', function () {
     var mockServer = new DevServer(serverConfig);
     mockServer.start(serverConfig);
 });
+
 /* gulp.task('server',function(){
     gulp.src('dist')
     .pipe(server({
