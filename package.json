@@ -42,6 +42,7 @@
     "gulp-webpack": "^1.5.0",
     "lodash": "^4.16.6",
     "object-assign": "^4.1.1",
+    "path": "^0.12.7",
     "portal-fe-devServer": "^1.0.0",
     "reactify": "^1.1.1"
   },

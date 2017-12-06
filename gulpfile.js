@@ -62,8 +62,8 @@ gulp.task('less:dist', function () {
         .pipe(gulp.dest('dist'));
 });
 
-//es6 to js
-gulp.task('react-es6',function(){
+//es6 to js,开发环境，可以相对友好的跟错误
+gulp.task('react-es6-dev',function(){
     gulp.src(['./src/**/*.jsx','./src/**/*.js'])
         //.pipe(browserify({
            // transform:['babelify','reactify']
@@ -87,9 +87,8 @@ gulp.task('react-es6',function(){
               },
           }))
         .pipe(gulp.dest('./dist/build'))
+        
 });
-
-gulp.task('webpack')
 
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
@@ -127,6 +126,6 @@ gulp.task('dev-server', function () {
     }));
 }) */
 gulp.task('before', [ 'copy:src', 'less']);
-gulp.task('default', ['before','react-es6','dev-server', 'watch']);
-gulp.task('dev',['before','react-es6','dev-server', 'watch'])
+gulp.task('default', ['before','react-es6-dev','dev-server', 'watch']);
+gulp.task('dev',['before','react-es6-dev','dev-server', 'watch'])
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);
