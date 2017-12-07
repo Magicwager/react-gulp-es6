@@ -144,16 +144,6 @@ gulp.task('dev-server', function () {
     var mockServer = new DevServer(serverConfig);
     mockServer.start(serverConfig);
 });
-
-/* gulp.task('server',function(){
-    gulp.src('dist')
-    .pipe(server({
-      livereload: true,
-      directoryListing: false,
-      defaultFile:"./seconde_stage_src/index.html",
-      open: true
-    }));
-}) */
 gulp.task('before', [ 'copy:src', 'less']);
 gulp.task('default', ['before','react-es6-dev','dev-server', 'watch','reload']);
 gulp.task('dev',['before','react-es6-dev','dev-server', 'watch'])
