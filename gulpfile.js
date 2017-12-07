@@ -10,6 +10,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var util = require('gulp-util');
 var minifycss = require('gulp-minify-css');
+var livereload=require('gulp-livereload')
 var koa = require('koa');
 var app = koa();
 var cfg = require('./config/config');
@@ -37,7 +38,7 @@ gulp.task('copy:src', function () {
         .pipe(rename(function (path) {
             path.dirname += '';//相对src的路径，例如设path.dirname='/test',则输出的路径会在原目录文件的外层包一层test
         }))
-        .pipe(gulp.dest("./dist"));
+        .pipe(gulp.dest("./dist"))
 });
 
 // 匹配所有 less文件进行 less 编译
@@ -120,6 +121,12 @@ gulp.task('watch', function () {
     gulp.watch([ 'src/**/**/*.html', 'src/**/**/*.js', 'src/**/**/*.css'], [ 'copy:src']);
 });
 
+gulp.task('reload', function () {
+  // Create LiveReload server
+  livereload.listen();
+  // Watch any files in dist/, reload on change
+  gulp.watch(['dist/**']).on('change', livereload.changed);
+});
 //清空 dist 目录下的资源
 gulp.task('clean', function () {
     console.log('清空 dist 目录下的资源')
@@ -148,6 +155,6 @@ gulp.task('dev-server', function () {
     }));
 }) */
 gulp.task('before', [ 'copy:src', 'less']);
-gulp.task('default', ['before','react-es6-dev','dev-server', 'watch']);
+gulp.task('default', ['before','react-es6-dev','dev-server', 'watch','reload']);
 gulp.task('dev',['before','react-es6-dev','dev-server', 'watch'])
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);
