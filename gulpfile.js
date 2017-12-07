@@ -17,6 +17,7 @@ var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var react=require('gulp-react');
 var webpack = require("gulp-webpack");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var server = require('gulp-server-livereload');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
@@ -81,20 +82,41 @@ gulp.task('react-es6-dev',function(){
               colors:true
             },
             module: {
-                loaders: [
-                  { test: /\.css$/, loader: 'style!css' },
-                ],
+                rules:[{
+                    test: /\.css$/,
+                    use: ExtractTextPlugin.extract({
+                      use: ['css-loader', 'postcss-loader'],
+                      fallback: 'style-loader'
+                    })
+                  }, {
+                         test: /\.less$/,
+                        use: ExtractTextPlugin.extract({
+                          use: ['css-loader', 'postcss-loader', 'less-loader'],
+                          fallback: 'style-loader'
+                        })
+
+                }]
+                
               },
           }))
-        .pipe(gulp.dest('./dist/build'))
-        
+        .pipe(gulp.dest('./dist/build'))  
 });
-
+gulp.task('react-es6',function(){
+    gulp.src(['./src/**/*.jsx','./src/**/*.js'])
+        //.pipe(browserify({
+           // transform:['babelify','reactify']
+        //}))//compile JSX (superset of javascript used in react UI library) files to javascript
+        .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
+        .pipe(babel({presets:[es2015]}))//es6tojs的解析器
+        .pipe(gulp.dest('dist'))
+        .pipe(webpack( require('./webpack.config.js') ))
+        .pipe(gulp.dest('./dist/build'))  
+});
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
     gulp.watch('src/**/**/*.less', ['less']);
-    gulp.watch(['./src/**/**/*.jsx','./src/**/**/*.js'],['react-es6']);
+    gulp.watch(['./src/**/**/*.jsx','./src/**/**/*.js'],['react-es6-dev']);
     gulp.watch([ 'src/**/**/*.html', 'src/**/**/*.js', 'src/**/**/*.css'], [ 'copy:src']);
 });
 

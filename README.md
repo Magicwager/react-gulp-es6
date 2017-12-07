@@ -26,7 +26,7 @@
 
     具体操作如下：
     1. `npm install` 安装依赖
-    2. 启动react调试服务,输入`gulp`
+    2. 启动react调试服务,输入`gulp dev`
 
 ### 代码说明
 
