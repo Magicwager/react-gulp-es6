@@ -16,6 +16,7 @@ var app = koa();
 var cfg = require('./config/config');
 var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
+var stage0 = require("babel-preset-stage-0");
 var react=require('gulp-react');
 var webpack = require("gulp-webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -71,7 +72,7 @@ gulp.task('react-es6-dev',function(){
            // transform:['babelify','reactify']
         //}))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
-        .pipe(babel({presets:[es2015]}))//es6tojs的解析器
+        .pipe(babel({presets:[es2015,stage0]}))//es6tojs的解析器
         .pipe(gulp.dest('dist'))
         .pipe(webpack({
             //babel编译import会转成require，webpack再包装以下代码让代码里支持require
