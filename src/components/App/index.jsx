@@ -9,18 +9,19 @@ export default class App extends Component{
     this.state = {
       collapsed: false,
     };
+    this.onCollapse=this.onCollapse.bind(this)
   }
   
-  /* onCollapse=(collapsed)=> {
-    console.log(collapsed);
+  onCollapse(collapsed) {
+    console.log(this);
     this.setState({ collapsed });
-  } */
+  }
   render(){
     return(
     <div>
       <div>
         <Layout>
-          <Sider >
+          <Sider  collapsible collapsed={this.state.collapsed}  onCollapse={this.onCollapse}>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Icon type="pie-chart" />
