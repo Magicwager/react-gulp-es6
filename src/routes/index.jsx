@@ -13,10 +13,10 @@ const Routers=(
 <Router history={hashHistory}>
 
     <Route exact  path='/' component={App}>
-         {/* 当 url 为/时渲染 Hello */}
+         {/* 当 url 为/时渲染 Hello， IndexRoute就是解决这个问题，显式指定Home是根路由的子组件，即指定默认情况下加载的子组件。你可以把IndexRoute想象成某个路径的index.html。*/}
         <IndexRoute component={Hello} />
         <Route path='/hello' component={Hello} />
-        <Route path='/myRepo' component={Myrepo} />
+        <Route path='/myRepo/:userId' component={Myrepo} />
     </Route>
     
 </Router>

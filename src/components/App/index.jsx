@@ -27,9 +27,9 @@ export default class App extends Component{
                 <Icon type="pie-chart" />
                 <span>Option 1</span>
               </Menu.Item>
-              <Menu.Item key="2">
+              <Menu.Item key="2" >
                 <Icon type="desktop" />
-                <span>Option 2</span>
+                <span>我的Git仓库</span>
             </Menu.Item>
               <SubMenu key="sub1" title={<span><Icon type="user" /><span>User</span></span>}>
                 <Menu.Item key="3">Tom</Menu.Item>

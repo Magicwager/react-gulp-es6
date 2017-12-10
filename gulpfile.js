@@ -17,7 +17,6 @@ var cfg = require('./config/config');
 var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var stage0 = require("babel-preset-stage-0");
-
 var react=require('gulp-react');
 var webpack = require("gulp-webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
