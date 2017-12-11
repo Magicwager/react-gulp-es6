@@ -52,6 +52,39 @@ http://localhost:8888/react-gulp-es6/       根路由
 
 http://localhost:8888/react-gulp-es6/#/myRepo       自定义myRepo路由
 
+本项目中react-router与antd中的Breadcrumb面包屑组件组合使用，用来导航项目节点，如下：
+
+```
+
+<Router history={hashHistory}>
+
+    <Route exact  path='/' breadcrumbName="首页" component={App}>
+         {/* 当 url 为/时渲染 Hello， IndexRoute就是解决这个问题，显式指定Home是根路由的子组件，即指定默认情况下加载的子组件。你可以把IndexRoute想象成某个路径的index.html。*/}
+        <IndexRoute component={Hello} />
+        <Route path='/hello' component={Hello} />
+        <Route path='/myRepo' breadcrumbName="gitRepo" component={Myrepo} />
+    </Route>
+    
+</Router>
+
+```
+
+除了需要定义每个Route中定义相对应的path（路由名）以及需要加载的对应的Component，在Route中再定义好breadcrumbName（即：面包屑的名字）。然后在父路由组件(App)中获取相关参数传入到antd的Breadcrumb组件中，如下：
+
+```
+
+<Header className='appHead'>
+       <Breadcrumb routes={this.props.routes} params={this.props.params} />
+</Header>
+
+
+```
+
+这里通过传入路由的routes就可以初始化Breadcrumb组件了。具体文档可以参考蚂蚁金服antd组件库的文档，[https://ant.design/components/breadcrumb-cn/
+]()
+
+
+
 - **本地模拟数据配置说明**
 
 项目中请求数据用的是axios,因为官方文档特别齐全，上手也特别快。同时它的生态也很好，有很多相关的插件辅助。比如这个项目中用到的axios-mock-adapter,可以用本地模拟数据来做单元测试。但是在官网介绍的axios-mock-adapter使用方法是放在源码中测试，有点不太友好。如下：

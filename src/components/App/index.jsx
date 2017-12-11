@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Breadcrumb } from 'antd';
+import {Link} from 'react-router';
 const { Header, Footer, Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
 
 export default class App extends Component{
   constructor(props){
     super(props);
+    console.log(this)
     this.state = {
       collapsed: false,
     };
     this.onCollapse=this.onCollapse.bind(this)
   }
-  
   onCollapse(collapsed) {
     console.log(this);
     this.setState({ collapsed });
@@ -25,11 +26,12 @@ export default class App extends Component{
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Icon type="pie-chart" />
-                <span>Option 1</span>
+                <Link to="/hello">Hello</Link>
               </Menu.Item>
               <Menu.Item key="2" >
                 <Icon type="desktop" />
-                <span>我的Git仓库</span>
+                <Link to="/myRepo">MyGitRep</Link>
+                {/* <span onClick={this.getMyGit}>我的Git仓库</span> */}
             </Menu.Item>
               <SubMenu key="sub1" title={<span><Icon type="user" /><span>User</span></span>}>
                 <Menu.Item key="3">Tom</Menu.Item>
@@ -40,9 +42,11 @@ export default class App extends Component{
             </Menu>
           </Sider>
             <Layout>
-              <Header>Header</Header>
+              <Header className='appHead'>
+                  <Breadcrumb routes={this.props.routes} params={this.props.params} />
+              </Header>
               <Content>{ this.props.children }</Content>
-              <Footer>Footer</Footer>
+              <Footer className='appFooter'></Footer>
             </Layout>
         </Layout>
       </div>
