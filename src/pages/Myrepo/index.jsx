@@ -8,6 +8,7 @@ export default class Myrepo extends Component {
         this.state={
             myRepoData:[]
         }
+        this.routeTo=this.routeTo.bind(this)
     }
     componentDidMount(){
         let self=this;
@@ -30,6 +31,14 @@ export default class Myrepo extends Component {
             }
         )
     }
+    routeTo(href){
+        const data = {href:href};
+        let path = {
+          pathname:'/repo',
+          query:data,
+        }
+        this.props.router.push(path);
+    }
     render(){
         let self=this;
         return (
@@ -38,7 +47,7 @@ export default class Myrepo extends Component {
                 {
                     self.state.myRepoData.map(function(repo,index){
                      return  (
-                         <Card title={repo.title} key={index} extra={<a href={repo.href}>More</a>} style={{ width: 300 ,maginRight:40,display:'inline-block'}}>
+                         <Card title={repo.title} key={index} extra={<span href="" onClick={self.routeTo.bind(this,repo.href)}>More</span>} style={{ width: 300 ,maginRight:40,display:'inline-block'}}>
                             <p>{repo.content}</p>
                         </Card>)
                      })

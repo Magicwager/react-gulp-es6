@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';//Router是React的一个组件,Router组件本身只是一个容器，真正的路由要通过Route组件定义
 import App from '../components/App'
 import Hello from '../pages/HelloWorld';
+import Gitrepo from '../pages/Gitrepo'
 import Myrepo from '../pages/Myrepo';
 
 
@@ -15,8 +16,10 @@ const Routers=(
     <Route exact  path='/' breadcrumbName="首页" component={App}>
          {/* 当 url 为/时渲染 Hello， IndexRoute就是解决这个问题，显式指定Home是根路由的子组件，即指定默认情况下加载的子组件。你可以把IndexRoute想象成某个路径的index.html。*/}
         <IndexRoute component={Hello} />
-        <Route path='/hello' component={Hello} />
-        <Route path='/myRepo' breadcrumbName="gitRepo" component={Myrepo} />
+        <Route path='/hello'   component={Hello} />
+        <Route path='/myRepo' breadcrumbName="repoList" component={Myrepo} />
+        <Route  path='/repo' breadcrumbName="gitRepo" component={Gitrepo} />
+        
     </Route>
     
 </Router>
