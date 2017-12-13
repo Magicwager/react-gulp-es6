@@ -16,9 +16,11 @@ const Routers=(
     <Route exact  path='/' breadcrumbName="首页" component={App}>
          {/* 当 url 为/时渲染 Hello， IndexRoute就是解决这个问题，显式指定Home是根路由的子组件，即指定默认情况下加载的子组件。你可以把IndexRoute想象成某个路径的index.html。*/}
         <IndexRoute component={Hello} />
-        <Route path='/hello'   component={Hello} />
-        <Route path='/myRepo' breadcrumbName="repoList" component={Myrepo} />
-        <Route  path='/repo' breadcrumbName="gitRepo" component={Gitrepo} />
+        <Route path='/hello' breadcrumbName="hello"   component={Hello} />
+        <Route path='/myRepo' breadcrumbName="repoList" component={Myrepo}>
+            <Route  path='/repo' breadcrumbName="gitRepo" component={Gitrepo} />
+        </Route>
+       
         
     </Route>
     

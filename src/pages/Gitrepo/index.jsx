@@ -8,6 +8,7 @@ export default class Gitrepo extends Component {
         }
     }
     componentDidMount(){
+        debugger
       
         
     }
