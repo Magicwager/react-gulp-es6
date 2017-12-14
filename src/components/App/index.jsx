@@ -26,14 +26,14 @@ export default class App extends Component{
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Icon type="pie-chart" />
-                <Link to="/hello">Hello</Link>
+                <Link to="/webAddress">webAddress</Link>
               </Menu.Item>
               <Menu.Item key="2" >
                 <Icon type="desktop" />
                 <Link to="/myRepo">MyGitRep</Link>
                 {/* <span onClick={this.getMyGit}>我的Git仓库</span> */}
             </Menu.Item>
-              <SubMenu key="sub1" title={<span><Icon type="user" /><span>网站导航</span></span>}>
+              <SubMenu key="sub1" title={<span><Icon type="user" /><span>name</span></span>}>
                 <Menu.Item key="3">Tom</Menu.Item>
                 <Menu.Item key="4">Bill</Menu.Item>
                 <Menu.Item key="5">Alex</Menu.Item>
