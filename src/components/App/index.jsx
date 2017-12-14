@@ -33,7 +33,7 @@ export default class App extends Component{
                 <Link to="/myRepo">MyGitRep</Link>
                 {/* <span onClick={this.getMyGit}>我的Git仓库</span> */}
             </Menu.Item>
-              <SubMenu key="sub1" title={<span><Icon type="user" /><span>User</span></span>}>
+              <SubMenu key="sub1" title={<span><Icon type="user" /><span>网站导航</span></span>}>
                 <Menu.Item key="3">Tom</Menu.Item>
                 <Menu.Item key="4">Bill</Menu.Item>
                 <Menu.Item key="5">Alex</Menu.Item>

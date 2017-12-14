@@ -11,7 +11,7 @@ module.exports=function(){
                 {
                     "title":"百度首页",
                    "href":"https://www.baidu.com",
-                    "content":"baidu搜索首页"
+                    "content":"baidu搜索首页,全球最大的中文搜索引擎、致力于让网民更便捷地获取信息，找到所求。百度超过千亿的中文网页数据库，可以瞬间找到相关的搜索结果。"
                 },
                 {
                     "title":"react-demos",
