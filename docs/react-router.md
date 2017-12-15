@@ -16,11 +16,14 @@ import { hashHistory } from 'react-router'
 
 官方推荐使用browserHistory
 
-使用hashHistory,浏览器的url是这样的：`/#/user/liuna?_k=adseis`
+使用hashHistory,浏览器的url是这样的：`/#/user/magicwager?_k=adseis`
 
-使用browserHistory,浏览器的url是这样的：`/user/liuna`
+使用browserHistory,浏览器的url是这样的：`/user/magicwager`
 
 这样看起来当然是browerHistory更好一些，但是它需要server端支持。
+如果开发服务器使用的是webpack-dev-server，加上--history-api-fallback参数就可以了。
+
+`$ webpack-dev-server --inline --content-base . --history-api-fallback`
 
 使用hashHistory时，因为有 # 的存在，浏览器不会发送request,react-router 自己根据 url 去 render 相应的模块。
 
