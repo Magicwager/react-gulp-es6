@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-export default class Gitrepo extends Component {
+export default class Webpage extends Component {
     constructor(props){
         super(props)
         this.state={
-            myRepoData:[]
+           
         }
     }
     componentDidMount(){

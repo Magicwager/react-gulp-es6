@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';//Router是React的一个组件,Router组件本身只是一个容器，真正的路由要通过Route组件定义
 import App from '../components/App'
 import Hello from '../pages/HelloWorld';
-import Gitrepo from '../pages/Gitrepo';
+import Webpage from '../pages/Webpage';
 import Myrepo from '../pages/Myrepo';
 import WebAddress from '../pages/WebAddress'
 
@@ -22,7 +22,7 @@ const Routers=(
            
         </Route>
         <Route path='/webAddress' breadcrumbName="WebTree" component={WebAddress}>
-            <Route  path='/repo' breadcrumbName="WebAddress" component={Gitrepo} />
+            <Route  path='/webPage' breadcrumbName="WebPage" component={Webpage} />
         </Route>
        
 

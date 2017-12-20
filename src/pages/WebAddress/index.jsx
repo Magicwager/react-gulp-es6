@@ -49,7 +49,7 @@ export default class Demo extends Component {
     console.log('onSelect', info);
     const data = {href:selectedKeys[0]};
     let path = {
-      pathname:'/repo',
+      pathname:'/webPage',
       query:data,
     }
     this.props.router.push(path);
