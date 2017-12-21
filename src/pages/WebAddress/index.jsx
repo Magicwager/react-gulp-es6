@@ -67,10 +67,23 @@ export default class Demo extends Component {
       return <TreeNode {...item} />;
     });
   }
+  renderSelf(){
+      return <div className='webAdd_tree'>
+                <Tree
+                    onExpand={this.onExpand.bind(this)}
+                    expandedKeys={this.state.expandedKeys}
+                    autoExpandParent={this.state.autoExpandParent}
+                    onSelect={this.onSelect.bind(this)}
+                    selectedKeys={this.state.selectedKeys}>
+                    {this.renderTreeNodes(this.state.treeData)}
+                </Tree>
+            </div>
+  }
   render() {
     return (
         <div className='webAdd_outer'>
-            <div className='webAdd_tree'>
+            {this.props.children ||this.renderSelf()}
+            {/* <div className='webAdd_tree'>
                     <Tree
                         onExpand={this.onExpand.bind(this)}
                         expandedKeys={this.state.expandedKeys}
@@ -81,10 +94,10 @@ export default class Demo extends Component {
                      </Tree>
 
 
-            </div>
-            <div className='webAdd_iframe'>
+            </div> */}
+           {/*  <div className='webAdd_iframe'>
                 {this.props.children }
-            </div>
+            </div> */}
 
         </div>
         
