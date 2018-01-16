@@ -23,6 +23,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var server = require('gulp-server-livereload');
 var DevServer = require("portal-fe-devServer");
 var serverConfig = cfg.serverConfig;
+var pmm = require('proxy-mock-middleware');
 
 // 编译 src 下所有的 html,js 文件到 dist 目录
 gulp.task('copy:src', function () {
@@ -149,9 +150,10 @@ gulp.task('clean', function () {
 
 //
 gulp.task('dev-server', function () {
-    serverConfig.app = app;
+   /*  serverConfig.app = app;
     var mockServer = new DevServer(serverConfig);
-    mockServer.start(serverConfig);
+    mockServer.start(serverConfig); */
+    pmm.start()
 });
 gulp.task('before', [ 'copy:src', 'less']);
 gulp.task('default', ['before','react-es6-dev','dev-server', 'watch','reload']);
