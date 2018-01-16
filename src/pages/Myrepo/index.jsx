@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {Card} from 'antd';
+import {Card, Pagination} from 'antd';
 import axios from 'axios';
 
 export default class Myrepo extends Component {
     constructor(props){
         super(props)
         this.state={
-            myRepoData:[]
+            myRepoData:[],
+            pageSize:10,
+            currentPage:1,
+            totalNum:0
         }
-        this.routeTo=this.routeTo.bind(this)
+        this.routeTo=this.routeTo.bind(this);
+        this.onShowSizeChange = this.onShowSizeChange.bind(this);
+        this.onChange = this.onChange.bind(this)
     }
     componentDidMount(){
         let self=this;
@@ -23,7 +28,10 @@ export default class Myrepo extends Component {
             function(res){
                 if(res.data.state==1){
                     self.setState({
-                        myRepoData:res.data.data
+                        myRepoData:res.data.data.listData,
+                        currentPage:res.data.data.currentPage,
+                        pageSize:res.data.data.pageSize,
+                        totalNum:res.data.data.totalNum
                     })
                 }else{
                     alert(res.data.message)
@@ -41,6 +49,12 @@ export default class Myrepo extends Component {
         }
         this.props.router.push(path);
     }
+    onShowSizeChange(current,size){
+        console.log("currentNum is "+current+" size is "+size)
+    }
+    onChange(current,size){
+        console.log("currentNum is "+current+" size is "+size)
+    }
     render(){
         let self=this;
         return (
@@ -54,6 +68,7 @@ export default class Myrepo extends Component {
                         </Card>)
                      })
                 }
+                <Pagination className='pagination' showSizeChanger onShowSizeChange={this.onShowSizeChange} onChange={this.onChange} current={this.state.currentPage} total={this.state.totalNum} pageSize={this.state.pageSize} />
                 {this.props.children }
 
             </div>
