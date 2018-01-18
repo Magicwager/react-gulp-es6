@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Webpage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-           
+        this.state = {
+
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         debugger
-      
-        
+
+
     }
-    render(){
-        let self=this;
+    render() {
+        let self = this;
         return (
             <iframe src={self.props.location.query.href} className='iframeOuter'></iframe>
         )
