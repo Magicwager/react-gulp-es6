@@ -10,14 +10,15 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var util = require('gulp-util');
 var minifycss = require('gulp-minify-css');
-var livereload=require('gulp-livereload')
+var livereload = require('gulp-livereload');
+var sequence = require('gulp-sequence');
 var koa = require('koa');
 var app = koa();
 var cfg = require('./config/config');
 var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var stage0 = require("babel-preset-stage-0");
-var react=require('gulp-react');
+var react = require('gulp-react');
 var webpack = require("gulp-webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var server = require('gulp-server-livereload');
@@ -30,6 +31,7 @@ gulp.task('copy:src', function () {
     gulp.src([
         'src/**/**/*.html',
         'src/**/**/*.js',
+        'src/**/**/*.jsx',
         'src/**/**/*.json',
         'src/**/**/*.png',
         'src/**/**/*.jpg',
@@ -67,75 +69,64 @@ gulp.task('less:dist', function () {
 });
 
 //es6 to js,开发环境，可以相对友好的跟错误
-gulp.task('react-es6-dev',function(){
-    gulp.src(['./src/**/*.jsx','./src/**/*.js'])
+gulp.task('react-es6-dev', function () {
+    gulp.src(['./src/**/*.jsx', './src/**/*.js'])
         //.pipe(browserify({
-           // transform:['babelify','reactify']
+        // transform:['babelify','reactify']
         //}))//compile JSX (superset of javascript used in react UI library) files to javascript
-        .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
-        .pipe(babel({presets:[es2015,stage0],babelrc:true}))//es6tojs的解析器
+        .pipe(react({ es6module: true }))//这里就是新加入的模块, 解析jsx用
+        .pipe(babel({ presets: [es2015, stage0], babelrc: true }))//es6tojs的解析器
         .pipe(gulp.dest('dist'))
         .pipe(webpack({
             //babel编译import会转成require，webpack再包装以下代码让代码里支持require
-            devtool:'cheap-module-source-map',
-            output:{
-              filename:"index.js",
+            devtool: 'cheap-module-source-map',
+            output: {
+                filename: "index.js",
             },
-            stats:{
-              colors:true
+            stats: {
+                colors: true
             },
             module: {
-                rules:[
+                rules: [
                     {
                         test: /\.js[x]?$/,
                         exclude: /(node_modules)/,
                         use: [{
-                          loader: 'babel-loader'
+                            loader: 'babel-loader'
                         }]
-                      },
+                    },
                     {
-                    test: /\.css$/,
-                    use: ExtractTextPlugin.extract({
-                      use: ['css-loader', 'postcss-loader'],
-                      fallback: 'style-loader'
-                    })
-                  }, {
-                         test: /\.less$/,
+                        test: /\.css$/,
                         use: ExtractTextPlugin.extract({
-                          use: ['css-loader', 'postcss-loader', 'less-loader'],
-                          fallback: 'style-loader'
+                            use: ['css-loader', 'postcss-loader'],
+                            fallback: 'style-loader'
+                        })
+                    }, {
+                        test: /\.less$/,
+                        use: ExtractTextPlugin.extract({
+                            use: ['css-loader', 'postcss-loader', 'less-loader'],
+                            fallback: 'style-loader'
                         })
 
-                }]
-                
-              },
-          }))
-        .pipe(gulp.dest('./dist/build'))  
-});
-gulp.task('react-es6',function(){
-    gulp.src(['./src/**/*.jsx','./src/**/*.js'])
-        //.pipe(browserify({
-           // transform:['babelify','reactify']
-        //}))//compile JSX (superset of javascript used in react UI library) files to javascript
-        .pipe(react({es6module: true}))//这里就是新加入的模块, 解析jsx用
-        .pipe(babel({presets:[es2015],babelrc:true}))//es6tojs的解析器
-        .pipe(gulp.dest('dist'))
-        .pipe(webpack( require('./webpack.config.js') ))
-        .pipe(gulp.dest('./dist/build'))  
+                    }]
+
+            },
+        }))
+        .pipe(gulp.dest('./dist/build'))
 });
 //监听文件改动，执行相应任务
 gulp.task('watch', function () {
     console.log('监听文件改动，执行相应任务');
     gulp.watch('src/**/**/*.less', ['less']);
-    gulp.watch(['./src/**/**/*.jsx','./src/**/**/*.js'],['react-es6-dev']);
-    gulp.watch([ 'src/**/**/*.html', 'src/**/**/*.js', 'src/**/**/*.css'], [ 'copy:src']);
+    gulp.watch(['./src/**/**/*.jsx', './src/**/**/*.js'], ['react-es6-dev']);
+    gulp.watch(['src/**/**/*.html', 'src/**/**/*.js', 'src/**/**/*.css'], ['copy:src']);
 });
 
 gulp.task('reload', function () {
-  // Create LiveReload server
-  livereload.listen();
-  // Watch any files in dist/, reload on change
-  gulp.watch(['dist/**']).on('change', livereload.changed);
+    // Create LiveReload server
+    livereload.listen();
+    // Watch any files in dist/, reload on change
+    gulp.watch(['dist/**']).on('change', livereload.changed);
 });
 //清空 dist 目录下的资源
 gulp.task('clean', function () {
@@ -150,12 +141,12 @@ gulp.task('clean', function () {
 
 //
 gulp.task('dev-server', function () {
-   /*  serverConfig.app = app;
-    var mockServer = new DevServer(serverConfig);
-    mockServer.start(serverConfig); */
+    /*  serverConfig.app = app;
+     var mockServer = new DevServer(serverConfig);
+     mockServer.start(serverConfig); */
     pmm.start()
 });
-gulp.task('before', [ 'copy:src', 'less']);
-gulp.task('default', ['before','react-es6-dev','dev-server', 'watch','reload']);
-gulp.task('dev',['before','react-es6-dev','dev-server', 'watch'])
+gulp.task('before', ['copy:src', 'less']);
+gulp.task('default', ['before', 'react-es6-dev', 'dev-server', 'watch', 'reload']);
+gulp.task('dev', ['before', 'react-es6-dev', 'dev-server', 'watch'])
 //gulp.task('trans-test', ['translate', 'dev-server','watch']);

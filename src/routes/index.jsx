@@ -4,7 +4,8 @@ import App from '../components/App'
 import Hello from '../pages/HelloWorld';
 import Webpage from '../pages/Webpage';
 import Myrepo from '../pages/Myrepo';
-import WebAddress from '../pages/WebAddress'
+import WebAddress from '../pages/WebAddress';
+import Comments from '../pages/Comments'
 
 
 const Routers = (
@@ -24,6 +25,7 @@ const Routers = (
             <Route path='/webAddress' breadcrumbName="WebTree" component={WebAddress}>
                 <Route path='/webPage' breadcrumbName="WebPage" component={Webpage} />
             </Route>
+            <Route path='/comments' breadcrumbName="Comments" component={Comments}></Route>
 
 
 

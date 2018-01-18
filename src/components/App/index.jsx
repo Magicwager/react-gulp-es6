@@ -38,6 +38,11 @@ export default class App extends Component {
                   <Link to="/myRepo">MyGitRep</Link>
                   {/* <span onClick={this.getMyGit}>我的Git仓库</span> */}
                 </Menu.Item>
+                <Menu.Item key="4" >
+                  <Icon type="desktop" />
+                  <Link to="/comments">Comments</Link>
+                  {/* <span onClick={this.getMyGit}>我的Git仓库</span> */}
+                </Menu.Item>
                 {/*  <SubMenu key="sub1" title={<span><Icon type="user" /><span>name</span></span>}>
                 <Menu.Item key="4">Tom</Menu.Item>
                 <Menu.Item key="5">Bill</Menu.Item>

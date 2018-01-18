@@ -4,6 +4,9 @@ module.exports = {
       },
       {
         "/react-gulp-es6/webAddress/getAddress": "./mock/webAddress/getAddress.json"
+      },
+      {
+        "/react-gulp-es6/comments/getComments": "./mock/comments/getComments.json"
       }
     ],
     "POST": [{
