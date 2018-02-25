@@ -40,7 +40,7 @@ export default class Myrepo extends Component {
             }
             )
     }
-    routeTo(href) {
+    routeTo(href){
         /* 可以通过穿对象的方式传参数，通过query属性传参数，在接收的组件中可以通过self.props.location.query获取参数 */
         const data = { href: href };
         let path = {
@@ -61,7 +61,7 @@ export default class Myrepo extends Component {
             <div className='Myrepo-outer' style={{ padding: 10 }}>
                 <h2>Magicwager's Repositories</h2>
                 {
-                    self.state.myRepoData.map(function (repo, index) {
+                    self.state.myRepoData.map((repo, index)=> {
                         return (
                             <Card title={repo.title} key={index} extra={<a href={repo.href} target="_blank">More</a>} style={{ width: 300, maginRight: 40, display: 'inline-block' }}>
                                 <p>{repo.content}</p>

@@ -8,7 +8,6 @@ export default class Webpage extends Component {
         }
     }
     componentDidMount() {
-        debugger
 
 
     }

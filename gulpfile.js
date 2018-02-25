@@ -18,6 +18,7 @@ var cfg = require('./config/config');
 var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var stage0 = require("babel-preset-stage-0");
+var stage2 = require("babel-preset-stage-2");
 var react = require('gulp-react');
 var webpack = require("gulp-webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -31,7 +32,6 @@ gulp.task('copy:src', function () {
     gulp.src([
         'src/**/**/*.html',
         'src/**/**/*.js',
-        'src/**/**/*.jsx',
         'src/**/**/*.json',
         'src/**/**/*.png',
         'src/**/**/*.jpg',
@@ -75,7 +75,7 @@ gulp.task('react-es6-dev', function () {
         // transform:['babelify','reactify']
         //}))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(react({ es6module: true }))//这里就是新加入的模块, 解析jsx用
-        .pipe(babel({ presets: [es2015, stage0], babelrc: true }))//es6tojs的解析器
+        .pipe(babel({ presets: [es2015, stage0], babelrc: false }))//es6tojs的解析器
         .pipe(gulp.dest('dist'))
         .pipe(webpack({
             //babel编译import会转成require，webpack再包装以下代码让代码里支持require
@@ -85,32 +85,7 @@ gulp.task('react-es6-dev', function () {
             },
             stats: {
                 colors: true
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.js[x]?$/,
-                        exclude: /(node_modules)/,
-                        use: [{
-                            loader: 'babel-loader'
-                        }]
-                    },
-                    {
-                        test: /\.css$/,
-                        use: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'postcss-loader'],
-                            fallback: 'style-loader'
-                        })
-                    }, {
-                        test: /\.less$/,
-                        use: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'postcss-loader', 'less-loader'],
-                            fallback: 'style-loader'
-                        })
-
-                    }]
-
-            },
+            }           
         }))
         .pipe(gulp.dest('./dist/build'))
 });
