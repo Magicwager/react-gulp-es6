@@ -11,20 +11,11 @@ var rename = require('gulp-rename');
 var util = require('gulp-util');
 var minifycss = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
-var sequence = require('gulp-sequence');
-var koa = require('koa');
-var app = koa();
-var cfg = require('./config/config');
-var browserify = require('gulp-browserify');
 var es2015 = require("babel-preset-es2015");
 var stage0 = require("babel-preset-stage-0");
 var stage2 = require("babel-preset-stage-2");
 var react = require('gulp-react');
 var webpack = require("gulp-webpack");
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var server = require('gulp-server-livereload');
-var DevServer = require("portal-fe-devServer");
-var serverConfig = cfg.serverConfig;
 var pmm = require('proxy-mock-middleware');
 
 // 编译 src 下所有的 html,js 文件到 dist 目录
@@ -71,9 +62,6 @@ gulp.task('less:dist', function () {
 //es6 to js,开发环境，可以相对友好的跟错误
 gulp.task('react-es6-dev', function () {
     gulp.src(['./src/**/*.jsx', './src/**/*.js'])
-        //.pipe(browserify({
-        // transform:['babelify','reactify']
-        //}))//compile JSX (superset of javascript used in react UI library) files to javascript
         .pipe(react({ es6module: true }))//这里就是新加入的模块, 解析jsx用
         .pipe(babel({ presets: [es2015, stage0], babelrc: false }))//es6tojs的解析器
         .pipe(gulp.dest('dist'))
@@ -116,12 +104,7 @@ gulp.task('clean', function () {
 
 //
 gulp.task('dev-server', function () {
-    /*  serverConfig.app = app;
-     var mockServer = new DevServer(serverConfig);
-     mockServer.start(serverConfig); */
     pmm.start()
 });
 gulp.task('before', ['copy:src', 'less']);
 gulp.task('default', ['before', 'react-es6-dev', 'dev-server', 'watch', 'reload']);
-gulp.task('dev', ['before', 'react-es6-dev', 'dev-server', 'watch'])
-//gulp.task('trans-test', ['translate', 'dev-server','watch']);

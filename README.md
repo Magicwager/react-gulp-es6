@@ -48,9 +48,9 @@ react-router这里使用的是3.0.1版本。主要的配置在src/routes下，�
 
 启动服务后访问例子：
 
-http://localhost:8888/react-gulp-es6/       根路由
+http://localhost:3000/react-gulp-es6/       根路由
 
-http://localhost:8888/react-gulp-es6/#/myRepo       自定义myRepo路由
+http://localhost:3000/react-gulp-es6/#/myRepo       自定义myRepo路由
 
 本项目中react-router与antd中的Breadcrumb面包屑组件组合使用，用来导航项目节点，如下：
 
